@@ -34,13 +34,13 @@ class MESH_OT_split_quad(bpy.types.Operator):
         # Verifica objeto
         if obj is None or obj.type != 'MESH':
             print("ERRO: Nenhuma malha válida selecionada.")
-            self.report({'ERROR'}, "Selecione uma malha.")
+            self.report({'ERROR'}, "Select a mesh.")
             return {'CANCELLED'}
 
         # Verifica Edit Mode
         if context.mode != 'EDIT_MESH':
             print("ERRO: Não está em Edit Mode.")
-            self.report({'ERROR'}, "Entre no Edit Mode.")
+            self.report({'ERROR'}, "Enter Edit Mode.")
             return {'CANCELLED'}
 
         # BMesh
@@ -60,7 +60,7 @@ class MESH_OT_split_quad(bpy.types.Operator):
 
             self.report(
                 {'WARNING'},
-                "Selecione exatamente 1 face."
+                "Select exactly one face."
             )
 
             return {'CANCELLED'}
@@ -75,7 +75,7 @@ class MESH_OT_split_quad(bpy.types.Operator):
 
             self.report(
                 {'WARNING'},
-                "A face precisa ser um Quad ou N-gon."
+                "The face must be a quad or an n-gon."
             )
 
             return {'CANCELLED'}
@@ -150,13 +150,13 @@ class MESH_OT_split_3(bpy.types.Operator):
         # Verifica objeto
         if obj is None or obj.type != 'MESH':
             print("SPLIT 3 ERRO: Nenhuma malha válida.")
-            self.report({'ERROR'}, "Selecione uma malha.")
+            self.report({'ERROR'}, "Select a mesh.")
             return {'CANCELLED'}
 
         # Verifica Edit Mode
         if context.mode != 'EDIT_MESH':
             print("SPLIT 3 ERRO: Não está em Edit Mode.")
-            self.report({'ERROR'}, "Entre no Edit Mode.")
+            self.report({'ERROR'}, "Enter Edit Mode.")
             return {'CANCELLED'}
 
         # BMesh
@@ -178,7 +178,7 @@ class MESH_OT_split_3(bpy.types.Operator):
 
             self.report(
                 {'WARNING'},
-                "Selecione exatamente 1 face."
+                "Select exactly one face."
             )
 
             return {'CANCELLED'}
@@ -197,7 +197,7 @@ class MESH_OT_split_3(bpy.types.Operator):
 
             self.report(
                 {'WARNING'},
-                "O Split 3 aceita faces com 4, 5 ou 6 vértices."
+                "Split 3 supports faces with 4, 5 or 6 vertices."
             )
 
             return {'CANCELLED'}
@@ -270,14 +270,14 @@ class MESH_OT_split_roll(bpy.types.Operator):
         if obj is None or obj.type != 'MESH':
             self.report(
                 {'ERROR'},
-                "Selecione uma malha."
+                "Select a mesh."
             )
             return {'CANCELLED'}
 
         if context.mode != 'EDIT_MESH':
             self.report(
                 {'ERROR'},
-                "Entre no Edit Mode."
+                "Enter Edit Mode."
             )
             return {'CANCELLED'}
 
@@ -295,7 +295,7 @@ class MESH_OT_split_roll(bpy.types.Operator):
 
             self.report(
                 {'WARNING'},
-                "Split Roll cancelado."
+                "Split Roll canceled."
             )
 
             return {'CANCELLED'}
@@ -312,76 +312,6 @@ classes = (
     MESH_OT_split_3,
     MESH_OT_split_roll,
 )
-
-
-def get_start_corner_from_side(
-    first_face,
-    second_face,
-    side
-):
-    """
-    Escolhe um dos dois cantos externos
-    da primeira face.
-
-    Não usa Viewport.
-    Usa apenas a topologia.
-    """
-
-    shared_edge = get_shared_edge(
-        first_face,
-        second_face
-    )
-
-
-    if shared_edge is None:
-
-        print(
-            "ROLL ERRO: "
-            "Aresta compartilhada inicial "
-            "não encontrada."
-        )
-
-        return None
-
-
-    # Os dois vértices que NÃO estão
-    # na aresta compartilhada são
-    # os dois possíveis cantos iniciais.
-
-    outer_verts = [
-        vert
-        for vert in first_face.verts
-        if vert not in shared_edge.verts
-    ]
-
-
-    if len(outer_verts) != 2:
-
-        print(
-            "ROLL ERRO: "
-            "Não foi possível identificar "
-            "os dois lados da primeira face."
-        )
-
-        return None
-
-
-    if side == 'SIDE_A':
-
-        return outer_verts[0]
-
-
-    if side == 'SIDE_B':
-
-        return outer_verts[1]
-
-
-    print(
-        "ROLL ERRO: "
-        "Side desconhecido."
-    )
-
-    return None
 
 
 def register():

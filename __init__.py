@@ -1,10 +1,10 @@
 bl_info = {
     "name": "Quad Splitter",
     "author": "Ronan",
-    "version": (3, 4, 0),
+    "version": (3, 5, 1),
     "blender": (4, 0, 0),
     "location": "View3D > Sidebar",
-    "description": "Ferramentas para criar transições de topologia em quads",
+    "description": "Tools for creating topology transitions in quads and n-gons",
     "category": "Mesh",
 }
 

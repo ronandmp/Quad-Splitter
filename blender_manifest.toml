@@ -1,0 +1,17 @@
+schema_version = "1.0.0"
+
+id = "quad_splitter"
+version = "3.5.1"
+name = "Quad Splitter"
+tagline = "Fast topology splits for quads and supported n-gons"
+maintainer = "Ronan"
+type = "add-on"
+
+website = "https://github.com/ronandmp/Quad-Splitter"
+tags = ["Mesh"]
+
+blender_version_min = "4.2.0"
+
+license = [
+    "SPDX:GPL-3.0-or-later",
+]

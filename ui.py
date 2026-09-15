@@ -60,7 +60,7 @@ class VIEW3D_PT_quad_splitter(bpy.types.Panel):
             )
 
             layout.label(
-                text=f"N-gon: {vert_count} vértices"
+                text=f"N-gon: {vert_count} vertices"
             )
 
             row = None
@@ -198,14 +198,14 @@ class VIEW3D_PT_quad_splitter(bpy.types.Panel):
             for index in range(2):
                 op = row.operator(
                     "mesh.split_3",
-                    text=f"Padrão {index + 1}"
+                    text=f"Pattern {index + 1}"
                 )
                 op.start_index = index
 
         else:
             row = layout.row()
             row.enabled = False
-            row.label(text="Disponível para 4, 5 ou 6 vértices")
+            row.label(text="Available for faces with 4, 5 or 6 vertices")
 
         layout.separator()
 
@@ -247,7 +247,7 @@ class VIEW3D_PT_quad_splitter(bpy.types.Panel):
 
             op = column.operator(
                 "mesh.split_roll",
-                text="Cortar"
+                text="Apply"
             )
             op.side = side
 
